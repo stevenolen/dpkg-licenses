@@ -34,7 +34,13 @@ esac
 SCRIPTLIB=$(dirname $(readlink -f "$0"))/lib/
 test -d "$SCRIPTLIB"
 
-format='%-2s  %-30s %-30s %-6s %-60s %s\n'
+# passing CSV env variable modifies output format to csv
+if [ -z "$CSV" ]; then
+  format='%-2s  %-30s %-30s %-6s %-60s %s\n'
+else
+  format='"%s","%s","%s","%s","%s","%s"\n'
+fi
+
 printf "$format" "St" "Name" "Version" "Arch" "Description" "Licenses"
 printf "$format" "--" "----" "-------" "----" "-----------" "--------"
 
@@ -53,4 +59,3 @@ COLUMNS=2000 dpkg -l | grep '^.[iufhwt]' | while read pState package pVer pArch 
 
   printf "$format" "$pState" "${package:0:30}" "${pVer:0:30}" "${pArch:0:6}" "${pDesc:0:60}" "$license"
 done
-
