@@ -41,8 +41,8 @@ else
   format='"%s","%s","%s","%s","%s","%s"\n'
 fi
 
-  printf "$format" "St" "Name" "Version" "Arch" "Description" "Licenses"
-  printf "$format" "--" "----" "-------" "----" "-----------" "--------"
+printf "$format" "St" "Name" "Version" "Arch" "Description" "Licenses"
+printf "$format" "--" "----" "-------" "----" "-----------" "--------"
 
 
 COLUMNS=2000 dpkg -l | grep '^.[iufhwt]' | while read pState package pVer pArch pDesc; do
