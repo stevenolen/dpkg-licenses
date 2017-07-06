@@ -44,7 +44,6 @@ fi
 printf "$format" "St" "Name" "Version" "Arch" "Description" "Licenses"
 printf "$format" "--" "----" "-------" "----" "-----------" "--------"
 
-
 COLUMNS=2000 dpkg -l | grep '^.[iufhwt]' | while read pState package pVer pArch pDesc; do
   license=
   for method in "$SCRIPTLIB"/reader*; do
